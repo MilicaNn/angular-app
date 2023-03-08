@@ -1,0 +1,42 @@
+<!-- 
+    MatNativeControl treba ubaciti ukoliko koristimo obican <select> tag
+    U ovom slucaju mi koristimo <mat-select> i nije nam potreban
+-->
+<section fxLayout fxLayoutAlign="center">
+    <mat-card fxFlex="600px">
+        <!--Naslov kartice-->
+        <mat-card-title fxLayoutAlign="center">
+            Start training
+        </mat-card-title>
+        <!--Sadrzaj-->
+        <mat-card-content fxLayoutAlign="center" fxLayoutGap="30px">           
+             <mat-form-field>
+                <mat-select placeholder="Chose exercise:">
+                    <mat-option value="walking">
+                        Walking
+                    </mat-option>
+                    <mat-option value="running">
+                        Running
+                    </mat-option>
+                    <mat-option value="squats">
+                        Squats
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-card-content>
+        <!--Akcija-->
+        <mat-card-actions fxLayoutAlign="center">
+            <!--
+                -Metodu onStartTraining smo definisali u newTrainingComponent.ts
+                -Ona osluskuje akcije iz tog dugmeta start. 
+                -Sluzi za razmenu podataka, roditeljske komponente TRAINING,
+                i decije komponente NEW-TRAINING
+                **EVENT EMITTER**
+            -->
+            <button type="=submit" mat-raised-button color="warn"
+            (click)="onStartTraining()">
+                Start
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</section>

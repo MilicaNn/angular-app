@@ -1,0 +1,25 @@
+<section>
+<form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px"
+#f="ngForm" (ngSubmit)="onSubmit(f)">
+<mat-form-field appearance="outline">
+    <mat-label>Input email</mat-label>
+    <input matInput type="email" email ngModel name="email"
+     placeholder="Email" #emailInput="ngModel" required>   
+    <mat-error *ngIf="emailInput.hasError('required')" > Error </mat-error>
+    <mat-error *ngIf="!emailInput.hasError('required')" > Error </mat-error>
+    <mat-hint>Please enter your email</mat-hint>
+
+</mat-form-field>
+
+<mat-form-field hintLabel="Please enter minimum 5 characters">
+    <input matInput type="password" ngModel placeholder="Password" name="password"
+    required minlength="5" #userInput="ngModel">
+    <mat-hint align="end"> {{ userInput.value?.length }} / 5 </mat-hint>
+    
+</mat-form-field>
+<button type="submit" mat-raised-button color="warn" [disabled]="f.invalid">Submit</button>
+
+
+
+</form>
+</section>

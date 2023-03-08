@@ -1,0 +1,8 @@
+<section>
+    <mat-progress-spinner [value]="timer" mode="determinate" value="10">
+    </mat-progress-spinner>
+    <h2> {{ timer }}</h2>
+    <p>You can do it!</p>
+    <button mat-raised-button color="warn" (click)="onStop()">
+        Stop</button>
+</section>

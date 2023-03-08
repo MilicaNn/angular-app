@@ -1,0 +1,70 @@
+
+<section>
+    <!---------------------------Email i password:---------------------------------------------------->
+    <!--
+    fxLayout:odredjuje kako cemo tretirati polje input u formi. 
+        I njega koristimo direktno u komponenti, zato sto smo ga instalirali u 
+        angular material, a html jezik svakako 
+    sadzi flexLayout, ali se ne moze koristiti ovako direktno nad komponentom,
+     to je razlika, i nije opsirniji
+    
+    fxLayoutGap:koristimo za razmake izmedju ovih forma koje koristimo
+
+    Direktiva fxLayout ona definise mail axis, a direktiva fxLayoutAlign 
+        definise poravnanje(prva vrednos:center se odnosi na glavnu osu, a 
+        druga vrednos je opciona:odnosi se na upravu osu:cross axis)
+    -->
+
+    <!-- #f-je lokalna promenljiva 
+        onSubmit()-je metoda, i njoj smo prosledili parametar NgForm
+        NgForm- je direktiva
+    -->
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="25px"
+     #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <!-- 
+        -ngIf- je STRUKTURNA direktiva, koja ima osobine klasicnog tvrdjenja stvari
+        U sustini kada ispitujemo da li je nesto tako. Ili ako ispitujemo neku petlju...
+        Sve sto pocinje * je deo te direktive. 
+        Proverava se...
+        -iza required pisemo EMAIL-to je standarni regex koji se koristi za proveru email-a
+    -->
+        <mat-form-field>
+            <mat-label>Enter your email:</mat-label>
+            <input type="email" ngModel matInput placeholder="Email" name="email"
+            required email #emailInput="ngModel">
+            <mat-error *ngIf="emailInput.hasError('required')"> Field should not empty</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">Please use the correct email format</mat-error>
+        </mat-form-field>
+        <mat-form-field hintLabel="Please enter minimum 8 characters">
+            <input matInput type="password" ngModel placeholder="Password" name="password"
+            required minlength="8" #passInput="ngModel">
+            
+            
+            <!--Za dinamicko citanje ili pisanje vrednosti, koristi se STRING INTERPRETACIJA,
+            ona se pise izmedju duplih viticastih zagrada {{...}}
+            -required-znaci da nam je polje obavezno
+        -->
+            <mat-hint align="end"> {{ passInput.value?.length }} / 8 </mat-hint>
+            
+        </mat-form-field>
+<!----------------------Datepicer:  --------------------------------------------------------------------------->
+        <mat-form-field>
+            <input matInput placeholder="Your date of birth" [matDatepicker]="picker" ngModel name="birthDate" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+<!----------------------Checkbox:-------------------------------------------------------------->
+        <mat-checkbox color="warn" ngModel name="acceptance" required>
+            I accept the terms of conditions of use. 
+        </mat-checkbox>
+       
+
+
+
+
+<!-------------------------------Button:      ----------------------------------------------->
+       <button type="submit" mat-raised-button color="warn" [disabled]="f.invalid">Submit</button>
+
+    </form>
+
+</section>
